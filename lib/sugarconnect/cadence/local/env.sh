@@ -29,22 +29,4 @@ shortcuts::sugarconnect::cadence::local::env::build() {
 
     # Use the latest npm.
     volta install npm
-
-    # An empty secret satisfies the requirements.
-    # The secret will be loaded from SUGAR_OAUTH_SA_CLIENT_SECRETS in custom_local.py.
-    touch "${CADENCE}/backend/main/src/resources/local/sugar_connect_sa_secret"
-
-    # SUGAR_OAUTH_CLIENT_ID and SUGAR_OAUTH_SA_CLIENT_SECRETS must be filled in.
-    cat <<EOF >"${CADENCE}/backend/main/src/config/settings/custom_local.py"
-PUBLIC_TENANT_BASE_URL = 'clbspot.localhost.com:28081'
-PUBLIC_TENANT_BASE_URL_FULL = 'https://' + PUBLIC_TENANT_BASE_URL
-SESSION_COOKIE_DOMAIN = '.clbspot.localhost.com'
-
-HTTP_SCHEME = 'https'
-
-SUGAR_OAUTH_CLIENT_ID = ''
-SUGAR_OAUTH_STS_SERVER = 'https://sts-stage.service.sugarcrm.com'
-SUGAR_OAUTH_SA_CLIENTS = {'us-west-2': 'srn:stage:iam:us-west-2:9999999999:sa:sugar-connect'}
-SUGAR_OAUTH_SA_CLIENT_SECRETS = {'us-west-2': ''}
-EOF
 }

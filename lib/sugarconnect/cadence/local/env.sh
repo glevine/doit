@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 set -o errexit
 set -o nounset
@@ -21,7 +21,7 @@ shortcuts::sugarconnect::cadence::local::env::build() {
         pip-compile requirements.in
         pip-compile test-requirements.in
         pip-compile dev-requirements.in
-        pip-sync requirements.txt test-requirements.txt dev-requirements.txt
+        GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1 GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1 pip-sync requirements.txt test-requirements.txt dev-requirements.txt
     )
 
     # Use a specific version of node.

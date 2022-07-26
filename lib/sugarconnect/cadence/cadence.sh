@@ -5,10 +5,10 @@ set -o nounset
 set -o pipefail
 
 # Globals.
-CADENCE="${HOME}/github.com/collabspot/collabspot-cadence"
+CADENCE="${HOME}/github.com/sugarcrm/collabspot-cadence"
 CADENCE_NODE_VERSION=12
 CADENCE_PYTHON_VERSION=3.9.10
-CADENCE_REMOTE_UPSTREAM=git@github.com:collabspot/collabspot-cadence.git
+CADENCE_REMOTE_UPSTREAM=git@github.com:sugarcrm/collabspot-cadence.git
 CADENCE_REMOTE_ORIGIN=git@github.com:glevine/collabspot-cadence.git
 
 shortcuts::sugarconnect::cadence::usage() {

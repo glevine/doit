@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarconnect::cadence::local::env::build() {
+chores::sugarcrm::connect::cadence::local::env::build() {
     pyenv install -s "${CADENCE_PYTHON_VERSION}"
     pyenv virtualenv -f "${CADENCE_PYTHON_VERSION}" "sugarconnect@${CADENCE_PYTHON_VERSION}"
 

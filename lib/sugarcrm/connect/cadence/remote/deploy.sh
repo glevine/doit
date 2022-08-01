@@ -4,14 +4,14 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarconnect::cadence::remote::deploy::usage() {
-    echo "Usage: chores sugarconnect cadence deploy <branch> <build> [-c cluster] [-n namespace] [-s]" 1>&2
+chores::sugarcrm::connect::cadence::remote::deploy::usage() {
+    echo "Usage: chores sugarcrm connect cadence deploy <branch> <build> [-c cluster] [-n namespace] [-s]" 1>&2
     exit ${1:-0}
 }
 
-chores::sugarconnect::cadence::remote::deploy() {
+chores::sugarcrm::connect::cadence::remote::deploy() {
     if [[ "$#" -ne 2 ]]; then
-        chores::sugarconnect::cadence::remote::deploy::usage 1
+        chores::sugarcrm::connect::cadence::remote::deploy::usage 1
     fi
 
     local branch=$1
@@ -26,7 +26,7 @@ chores::sugarconnect::cadence::remote::deploy() {
             cluster=${OPTARG}
             ;;
         h)
-            chores::sugarconnect::cadence::remote::deploy::usage 0
+            chores::sugarcrm::connect::cadence::remote::deploy::usage 0
             ;;
         n)
             namespace=${OPTARG}
@@ -35,7 +35,7 @@ chores::sugarconnect::cadence::remote::deploy() {
             sync=true
             ;;
         * | \? | :)
-            chores::sugarconnect::cadence::remote::deploy::usage 1
+            chores::sugarcrm::connect::cadence::remote::deploy::usage 1
             ;;
         esac
     done

@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarconnect::cadence::local::ide::configure() {
+chores::sugarcrm::connect::cadence::local::ide::configure() {
     mkdir -p "${CADENCE}/.vscode"
 
     cat <<EOF >"${CADENCE}/.vscode/settings.json"

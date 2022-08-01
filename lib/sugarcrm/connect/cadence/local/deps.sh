@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarconnect::cadence::local::deps::resolve() {
+chores::sugarcrm::connect::cadence::local::deps::resolve() {
     if [[ ! -d "${CADENCE}" ]]; then
         git clone --recurse-submodules --remote-submodules -o upstream "${CADENCE_REMOTE_UPSTREAM}" "${CADENCE}"
     fi

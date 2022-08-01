@@ -5,7 +5,7 @@ set -o nounset
 set -o pipefail
 
 chores::usage() {
-    echo "Usage: chores [sugarconnect]" 1>&2
+    echo "Usage: chores [sugarcrm]" 1>&2
     exit ${1:-0}
 }
 
@@ -24,9 +24,9 @@ for file in $(find ./lib); do
 done
 
 case $1 in
-sugarconnect)
+sugarcrm)
     shift
-    chores::sugarconnect "$@"
+    chores::sugarcrm "$@"
     ;;
 *)
     chores::usage 1

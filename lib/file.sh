@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-shortcuts::file::append() {
+chores::file::append() {
     local content=$1
     local file=$2
 

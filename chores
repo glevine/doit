@@ -4,13 +4,13 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-shortcuts::usage() {
-    echo "Usage: shortcuts [sugarconnect]" 1>&2
+chores::usage() {
+    echo "Usage: chores [sugarconnect]" 1>&2
     exit ${1:-0}
 }
 
 if [[ "$#" -eq 0 ]]; then
-    shortcuts::usage 1
+    chores::usage 1
 fi
 
 # Globals.
@@ -26,9 +26,9 @@ done
 case $1 in
 sugarconnect)
     shift
-    shortcuts::sugarconnect "$@"
+    chores::sugarconnect "$@"
     ;;
 *)
-    shortcuts::usage 1
+    chores::usage 1
     ;;
 esac

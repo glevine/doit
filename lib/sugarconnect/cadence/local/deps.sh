@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-shortcuts::sugarconnect::cadence::local::deps::resolve() {
+chores::sugarconnect::cadence::local::deps::resolve() {
     if [[ ! -d "${CADENCE}" ]]; then
         git clone --recurse-submodules --remote-submodules -o upstream "${CADENCE_REMOTE_UPSTREAM}" "${CADENCE}"
     fi
@@ -29,11 +29,11 @@ shortcuts::sugarconnect::cadence::local::deps::resolve() {
 
     # Add settings to custom_local.py.
     touch "${CADENCE}/backend/main/src/config/settings/custom_local.py"
-    shortcuts::file::append "PUBLIC_TENANT_BASE_URL = 'clbspot.localhost.com:28081'" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
-    shortcuts::file::append "PUBLIC_TENANT_BASE_URL_FULL = 'https://' + PUBLIC_TENANT_BASE_URL" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
-    shortcuts::file::append "SESSION_COOKIE_DOMAIN = '.clbspot.localhost.com'" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
-    shortcuts::file::append "HTTP_SCHEME = 'https'" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
-    shortcuts::file::append "SUGAR_OAUTH_STS_SERVER = 'https://sts-stage.service.sugarcrm.com'" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
+    chores::file::append "PUBLIC_TENANT_BASE_URL = 'clbspot.localhost.com:28081'" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
+    chores::file::append "PUBLIC_TENANT_BASE_URL_FULL = 'https://' + PUBLIC_TENANT_BASE_URL" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
+    chores::file::append "SESSION_COOKIE_DOMAIN = '.clbspot.localhost.com'" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
+    chores::file::append "HTTP_SCHEME = 'https'" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
+    chores::file::append "SUGAR_OAUTH_STS_SERVER = 'https://sts-stage.service.sugarcrm.com'" "${CADENCE}/backend/main/src/config/settings/custom_local.py"
 
     # Some settings must be added manually.
     echo ""

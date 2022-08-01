@@ -1,9 +1,9 @@
-# shortcuts
+# chores
 
-A collection of bash scripts to make things easier.
+A collection of bash scripts to automate routine or unpleasant tasks.
 
 ```shell
-shortcuts <subcommand1> <subcommand2> <subcommand3> ... <subcommandN>
+chores <subcommand1> <subcommand2> <subcommand3> ... <subcommandN>
 ```
 
 ## Sugar Connect
@@ -11,17 +11,17 @@ shortcuts <subcommand1> <subcommand2> <subcommand3> ... <subcommandN>
 Install and configure the collabspot-cadence project for local development.
 
 ```shell
-shortcuts sugarconnect cadence develop
+chores sugarconnect cadence develop
 ```
 
 Build the collabspot-cadence application locally.
 
 ```shell
-shortcuts sugarconnect cadence build
+chores sugarconnect cadence build
 ```
 
 Deploy the collabspot-cadence application remotely.
 
 ```shell
-shortcuts sugarconnect cadence deploy some_branch 4 -c k8s-usw2-dev -n sugarconnect -s
+chores sugarconnect cadence deploy some_branch 4 -c k8s-usw2-dev -n sugarconnect -s
 ```

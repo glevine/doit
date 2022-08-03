@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 
+set +o allexport
 set -o errexit
 set -o nounset
 set -o pipefail
@@ -13,11 +14,10 @@ if [[ "$#" -eq 0 ]]; then
     chores::usage 1
 fi
 
-# Globals.
-MULTIVERSE="${HOME}/github.com/sugarcrm/multiverse"
-
-# Source all files in lib/.
-for file in $(find ./lib); do
+# Source all files in lib/. Take into consideration that the binary may be
+# linked.
+CHORES_LIB=${0:A:h}/lib
+for file in $(find $CHORES_LIB); do
     if [[ -f "${file}" ]]; then
         source "${file}"
     fi

@@ -18,12 +18,8 @@ chores::sugarcrm::multiverse::bazel::install() {
     # installs python2 and prioritizes python3 globally. Once python2 is no
     # longer necessary, unset it with:
     # pyenv global system; pyenv uninstall 3.10.6; pyenv uninstall 2.7.18;
-    if [[ $(pyenv versions | grep -q "3.10.6")$? -eq 0 ]]; then
-        pyenv install 3.10.6
-    fi
-    if [[ $(pyenv versions | grep -q "2.7.18")$? -eq 0 ]]; then
-        pyenv install 2.7.18
-    fi
+    pyenv install -s 3.10.6
+    pyenv install -s 2.7.18
     pyenv global 3.10.6 2.7.18
 
     chores::sugarcrm::multiverse::bazel::test

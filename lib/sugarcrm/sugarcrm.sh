@@ -1,11 +1,12 @@
 #!/usr/bin/env zsh
 
+set +o allexport
 set -o errexit
 set -o nounset
 set -o pipefail
 
 chores::sugarcrm::usage() {
-    echo "Usage: chores sugarcrm [connect]" 1>&2
+    echo "Usage: chores sugarcrm [connect|multiverse]" 1>&2
     exit ${1:-0}
 }
 
@@ -18,6 +19,10 @@ chores::sugarcrm() {
     connect)
         shift
         chores::sugarcrm::connect "$@"
+        ;;
+    multiverse)
+        shift
+        chores::sugarcrm::multiverse "$@"
         ;;
     *)
         chores::sugarcrm::usage 1

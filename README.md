@@ -6,6 +6,14 @@ A collection of bash scripts to automate routine or unpleasant tasks.
 chores <subcommand1> <subcommand2> <subcommand3> ... <subcommandN>
 ```
 
+## multiverse
+
+Install and configure the multiverse project for local development.
+
+```shell
+chores sugarcrm connect cadence develop
+```
+
 ## Sugar Connect
 
 Install and configure the collabspot-cadence project for local development.

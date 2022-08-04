@@ -11,7 +11,7 @@ chores <subcommand1> <subcommand2> <subcommand3> ... <subcommandN>
 Install and configure the multiverse project for local development.
 
 ```shell
-chores sugarcrm connect cadence develop
+chores sugarcrm multiverse develop
 ```
 
 ## Sugar Connect

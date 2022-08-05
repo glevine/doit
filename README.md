@@ -8,27 +8,21 @@ chores <subcommand1> <subcommand2> <subcommand3> ... <subcommandN>
 
 ## multiverse
 
-Install and configure the multiverse project for local development.
+Common `multiverse` tasks (TBD).
 
 ```shell
-chores sugarcrm multiverse develop
+chores sugarcrm multiverse ?
 ```
 
 ## Sugar Connect
 
-Install and configure the collabspot-cadence project for local development.
-
-```shell
-chores sugarcrm connect cadence develop
-```
-
-Build the collabspot-cadence application locally.
+Build the `collabspot-cadence` application.
 
 ```shell
 chores sugarcrm connect cadence build
 ```
 
-Deploy the collabspot-cadence application remotely.
+Deploy the `collabspot-cadence` application.
 
 ```shell
 chores sugarcrm connect cadence deploy some_branch 4 -c k8s-usw2-dev -n sugarconnect -s

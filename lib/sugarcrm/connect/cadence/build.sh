@@ -5,7 +5,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarcrm::connect::cadence::local::build() {
+chores::sugarcrm::connect::cadence::build() {
     chores::hostname::add 127.0.0.1 clbspot.localhost.com
     chores::hostname::add 127.0.0.1 sugarcrm.clbspot.localhost.com
 
@@ -16,7 +16,7 @@ chores::sugarcrm::connect::cadence::local::build() {
     )
 
     # Link the portal.
-    # ln -sf "${CADENCE}/sugar-connect-portal/dist/sugar-connect-portal" "${CADENCE}/backend/main/src/static/app"
+    ln -sf "${CADENCE}/sugar-connect-portal/dist/sugar-connect-portal" "${CADENCE}/backend/main/src/static/app"
 
-    chores::sugarcrm::connect::cadence::local::django::manage refresh_sa_tokens
+    chores::sugarcrm::connect::cadence::django::manage refresh_sa_tokens
 }

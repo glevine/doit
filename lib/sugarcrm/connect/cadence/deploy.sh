@@ -21,7 +21,7 @@ chores::sugarcrm::connect::cadence::deploy() {
     local namespace="sugarconnect"
     local sync=false
 
-    while getopts :c:m:n:s opt; do
+    while getopts c:h:m:n:s: opt; do
         case "${opt}" in
         c)
             cluster=${OPTARG}

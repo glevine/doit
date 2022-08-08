@@ -9,7 +9,7 @@ set -o pipefail
 MULTIVERSE="${HOME}/github.com/sugarcrm/multiverse"
 
 chores::sugarcrm::multiverse::usage() {
-    echo "Usage: chores sugarcrm multiverse [?]" 1>&2
+    echo "Usage: chores sugarcrm multiverse [build|deploy|test|view]" 1>&2
     exit ${1:-0}
 }
 
@@ -19,6 +19,22 @@ chores::sugarcrm::multiverse() {
     fi
 
     case $1 in
+    build)
+        shift
+        chores::sugarcrm::multiverse::build "$@"
+        ;;
+    deploy)
+        shift
+        chores::sugarcrm::multiverse::deploy "$@"
+        ;;
+    test)
+        shift
+        chores::sugarcrm::multiverse::test "$@"
+        ;;
+    view)
+        shift
+        chores::sugarcrm::multiverse::view "$@"
+        ;;
     *)
         chores::sugarcrm::multiverse::usage 1
         ;;

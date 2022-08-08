@@ -13,5 +13,8 @@ chores::sugarcrm::multiverse::projects::golib::build() {
 }
 
 chores::sugarcrm::multiverse::projects::golib::test() {
-    bazel test //projects/golib/...
+    (
+        cd "${MULTIVERSE}"
+        bazel test //projects/golib/...
+    )
 }

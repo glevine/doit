@@ -30,7 +30,7 @@ chores::sugarcrm::multiverse::projects::connections::deploy() {
 chores::sugarcrm::multiverse::projects::bankshot::test() {
     (
         cd "${MULTIVERSE}"
-        bazel test //projects/connections/... --nocache_test_results --test_timeout=15
+        bazel test //projects/connections/...
     )
 }
 

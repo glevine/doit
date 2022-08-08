@@ -13,5 +13,5 @@ chores::sugarcrm::multiverse::projects::golib::build() {
 }
 
 chores::sugarcrm::multiverse::projects::golib::test() {
-    bazel test //projects/golib/... --nocache_test_results --test_timeout=15
+    bazel test //projects/golib/...
 }

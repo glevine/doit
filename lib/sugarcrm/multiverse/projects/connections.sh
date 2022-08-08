@@ -27,7 +27,7 @@ chores::sugarcrm::multiverse::projects::connections::deploy() {
     )
 }
 
-chores::sugarcrm::multiverse::projects::bankshot::test() {
+chores::sugarcrm::multiverse::projects::connections::test() {
     (
         cd "${MULTIVERSE}"
         bazel test //projects/connections/...

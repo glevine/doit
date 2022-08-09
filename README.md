@@ -8,10 +8,28 @@ chores <subcommand1> <subcommand2> <subcommand3> ... <subcommandN>
 
 ## multiverse
 
-Common `multiverse` tasks (TBD).
+Build projects.
 
 ```shell
-chores sugarcrm multiverse ?
+chores sugarcrm multiverse build -p bankshot,connections,scloud
+```
+
+Deploy a project to the dev cluster.
+
+```shell
+chores sugarcrm multiverse deploy -p connections
+```
+
+Test projects.
+
+```shell
+chores sugarcrm multiverse test -p bankshot,connections,golib
+```
+
+View projects.
+
+```shell
+chores sugarcrm multiverse view -c prod -r usw2 -p bankshot,connections
 ```
 
 ## Sugar Connect
@@ -25,5 +43,5 @@ chores sugarcrm connect cadence build
 Deploy the `collabspot-cadence` application.
 
 ```shell
-chores sugarcrm connect cadence deploy some_branch 4 -c k8s-usw2-dev -n sugarconnect -s
+chores sugarcrm connect cadence deploy some_branch 4 -n sugarconnect -s
 ```

@@ -29,7 +29,11 @@ chores sugarcrm multiverse test -p bankshot,connections,golib
 View projects.
 
 ```shell
-chores sugarcrm multiverse view -c prod -r usw2 -p bankshot,connections
+# Show all resources.
+chores sugarcrm multiverse view -c prod -r usw2 -p bankshot,connections,cxp
+
+# Show select resources.
+chores sugarcrm multiverse view -c dev -r usw2 -w pod,job,svc -p bankshot,connections
 ```
 
 ## Sugar Connect

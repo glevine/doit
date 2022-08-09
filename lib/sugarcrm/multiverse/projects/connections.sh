@@ -36,5 +36,5 @@ chores::sugarcrm::multiverse::projects::connections::test() {
 
 chores::sugarcrm::multiverse::projects::connections::view() {
     kubens connections
-    kubectl get all
+    kubectl get $1
 }

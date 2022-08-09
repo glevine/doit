@@ -29,5 +29,5 @@ chores::sugarcrm::multiverse::projects::bankshot::test() {
 
 chores::sugarcrm::multiverse::projects::bankshot::view() {
     kubens bankshot
-    kubectl get all
+    kubectl get $1
 }

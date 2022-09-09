@@ -31,8 +31,27 @@ chores::sugarcrm::multiverse::build() {
         chores::sugarcrm::multiverse::build::usage 1
     fi
 
+    (
+        cd "${MULTIVERSE}"
+        make go-gazelle
+    )
+
     for project in $(echo ${projects} | sed "s/,/ /g"); do
+        local fn="chores::sugarcrm::multiverse::projects::${project}::build"
+
         figlet "${project}"
-        eval "chores::sugarcrm::multiverse::projects::${project}::build"
+
+        if command -v "${fn}" &>/dev/null; then
+            eval "${fn}"
+        else
+            chores::sugarcrm::multiverse::build::project "${project}"
+        fi
     done
+}
+
+chores::sugarcrm::multiverse::build::project() {
+    (
+        cd "${MULTIVERSE}"
+        bazel build //projects/${1}/...
+    )
 }

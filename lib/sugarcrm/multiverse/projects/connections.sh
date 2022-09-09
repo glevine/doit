@@ -5,36 +5,13 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarcrm::multiverse::projects::connections::build() {
-    (
-        cd "${MULTIVERSE}"
-        bazel build //projects/connections/...
-    )
-}
-
 chores::sugarcrm::multiverse::projects::connections::deploy() {
     # Deploy Kafka topics.
-    chores::sugarcrm::multiverse::projects::cxp::deploy
+    chores::sugarcrm::multiverse::deploy::project cxp
 
     # Deploy bankshot.
-    chores::sugarcrm::multiverse::projects::bankshot::deploy
+    chores::sugarcrm::multiverse::deploy::project bankshot
 
     # Deploy connections.
-    (
-        cd "${MULTIVERSE}/k8s/connections"
-        kubens connections
-        skaffold run -p dev
-    )
-}
-
-chores::sugarcrm::multiverse::projects::connections::test() {
-    (
-        cd "${MULTIVERSE}"
-        bazel test //projects/connections/...
-    )
-}
-
-chores::sugarcrm::multiverse::projects::connections::view() {
-    kubens connections
-    kubectl get $1
+    chores::sugarcrm::multiverse::deploy::project connections
 }

@@ -31,10 +31,30 @@ chores::sugarcrm::multiverse::deploy() {
         chores::sugarcrm::multiverse::deploy::usage 1
     fi
 
+    (
+        cd "${MULTIVERSE}"
+        make go-gazelle
+    )
+
     kubectx k8s-usw2-dev
 
     for project in $(echo ${projects} | sed "s/,/ /g"); do
+        local fn="chores::sugarcrm::multiverse::projects::${project}::deploy"
+
         figlet "${project}"
-        eval "chores::sugarcrm::multiverse::projects::${project}::deploy"
+
+        if command -v "${fn}" &>/dev/null; then
+            eval "${fn}"
+        else
+            chores::sugarcrm::multiverse::deploy::project "${project}"
+        fi
     done
+}
+
+chores::sugarcrm::multiverse::deploy::project() {
+    (
+        cd "${MULTIVERSE}/k8s/${1}"
+        kubens "${1}"
+        skaffold run -p dev
+    )
 }

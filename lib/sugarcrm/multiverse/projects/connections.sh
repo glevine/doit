@@ -13,5 +13,9 @@ chores::sugarcrm::multiverse::projects::connections::deploy() {
     chores::sugarcrm::multiverse::deploy::project bankshot
 
     # Deploy connections.
-    chores::sugarcrm::multiverse::deploy::project connections
+    (
+        cd "${MULTIVERSE}/k8s/services/connections"
+        kubens connections
+        skaffold run -p dev
+    )
 }

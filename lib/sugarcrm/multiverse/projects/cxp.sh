@@ -7,7 +7,7 @@ set -o pipefail
 
 chores::sugarcrm::multiverse::projects::cxp::deploy() {
     (
-        cd "${MULTIVERSE}/k8s/connect-kafka-topics"
+        cd "${MULTIVERSE}/k8s/services/connect-kafka-topics"
         kubens cxp
         skaffold run -p dev
     )

@@ -46,17 +46,22 @@ chores::sugarcrm::multiverse::view() {
     kubectx "k8s-${region}-${cluster}"
 
     for project in $(echo ${projects} | sed "s/,/ /g"); do
-        local fn="chores::sugarcrm::multiverse::projects::${project}::view"
-
         figlet "${project}"
-
-        if command -v "${fn}" &>/dev/null; then
-            eval "${fn} ${workloads}"
-        else
-            # `kubens sugarconnect` is not working: https://sugarcrm.atlassian.net/browse/OPS-19491
-            # kubens "${project}"
-            # kubectl get "${workloads}"
-            kubectl --context "k8s-${region}-${cluster}" -n "${project}" get "${workloads}"
-        fi
+        chores::sugarcrm::multiverse::view::project "${project}" "${workloads}"
     done
+}
+
+chores::sugarcrm::multiverse::view::project() {
+    local project=$1
+    local workloads=$2
+    local cmd="chores::sugarcrm::multiverse::projects::${project}::view"
+
+    if command -v "${cmd}" &>/dev/null; then
+        eval "${cmd} ${workloads}"
+    else
+        # `kubens sugarconnect` is not working: https://sugarcrm.atlassian.net/browse/OPS-19491
+        # kubens "${project}"
+        # kubectl get "${workloads}"
+        kubectl -n "${project}" get "${workloads}"
+    fi
 }

@@ -39,22 +39,22 @@ chores::sugarcrm::multiverse::deploy() {
     kubectx k8s-usw2-dev
 
     for project in $(echo ${projects} | sed "s/,/ /g"); do
-        local fn="chores::sugarcrm::multiverse::projects::${project}::deploy"
-
         figlet "${project}"
-
-        if command -v "${fn}" &>/dev/null; then
-            eval "${fn}"
-        else
-            chores::sugarcrm::multiverse::deploy::project "${project}"
-        fi
+        chores::sugarcrm::multiverse::deploy::project "${project}"
     done
 }
 
 chores::sugarcrm::multiverse::deploy::project() {
-    (
-        cd "${MULTIVERSE}/k8s/${1}"
-        kubens "${1}"
-        skaffold run -p dev
-    )
+    local project=$1
+    local cmd="chores::sugarcrm::multiverse::projects::${project}::deploy"
+
+    if command -v "${cmd}" &>/dev/null; then
+        eval "${cmd}"
+    else
+        (
+            cd "${MULTIVERSE}/k8s/services/${project}"
+            kubens "${project}"
+            skaffold run -p dev
+        )
+    fi
 }

@@ -16,6 +16,6 @@ chores::sugarcrm::multiverse::projects::connections::deploy() {
     (
         cd "${MULTIVERSE}/k8s/services/connections"
         kubens connections
-        skaffold run -p dev
+        skaffold run -p dev --force=true
     )
 }

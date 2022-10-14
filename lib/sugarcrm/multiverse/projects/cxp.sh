@@ -9,7 +9,7 @@ chores::sugarcrm::multiverse::projects::cxp::deploy() {
     (
         cd "${MULTIVERSE}/k8s/services/connect-kafka-topics"
         kubens cxp
-        skaffold run
+        skaffold run --force=true
     )
 }
 

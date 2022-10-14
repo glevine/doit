@@ -54,7 +54,7 @@ chores::sugarcrm::multiverse::deploy::project() {
         (
             cd "${MULTIVERSE}/k8s/services/${project}"
             kubens "${project}"
-            skaffold run -p dev
+            skaffold run -p dev --force=true
         )
     fi
 }

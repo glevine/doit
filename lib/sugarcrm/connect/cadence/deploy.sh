@@ -51,7 +51,7 @@ chores::sugarcrm::connect::cadence::deploy() {
         for svc in ${namespace}-{celerybeat,crmdata,csinbox,emailtracking,mailbox,main,materializedviews,provisioner,proxy,smartfolders,twowaysync,worker,backoffice,realtime-sync,realtime-worker}; do
             pushd "${svc}"
             sed -i '' 's|:.*$|:'"${branch}"'\.'"${build}"'|' "docker/${svc}/Dockerfile"
-            skaffold run
+            skaffold run --force=true
             popd
         done
     )

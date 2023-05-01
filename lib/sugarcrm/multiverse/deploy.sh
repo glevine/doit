@@ -13,7 +13,7 @@ chores::sugarcrm::multiverse::deploy::usage() {
 chores::sugarcrm::multiverse::deploy() {
     local projects
 
-    while getopts h:p: opt; do
+    while getopts hp: opt; do
         case "${opt}" in
         h)
             chores::sugarcrm::multiverse::deploy::usage 0

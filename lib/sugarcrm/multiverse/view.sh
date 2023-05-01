@@ -16,7 +16,7 @@ chores::sugarcrm::multiverse::view() {
     local region="usw2"
     local workloads="all"
 
-    while getopts c:h:p:r:w: opt; do
+    while getopts c:hp:r:w: opt; do
         case "${opt}" in
         c)
             cluster=${OPTARG}

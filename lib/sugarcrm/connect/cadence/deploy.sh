@@ -11,31 +11,45 @@ chores::sugarcrm::connect::cadence::deploy::usage() {
 }
 
 chores::sugarcrm::connect::cadence::deploy() {
-    if [[ "$#" -ne 2 ]]; then
-        chores::sugarcrm::connect::cadence::deploy::usage 1
-    fi
-
-    local branch=$1
-    local build=$2
     local namespace="sugarconnect"
     local sync=false
 
-    while getopts h:m:n:s: opt; do
-        case "${opt}" in
-        h)
-            chores::sugarcrm::connect::cadence::deploy::usage 0
-            ;;
-        n)
-            namespace=${OPTARG}
-            ;;
-        s)
-            sync=true
-            ;;
-        * | \? | :)
-            chores::sugarcrm::connect::cadence::deploy::usage 1
-            ;;
-        esac
+    local pos_args # Holds positional arguments.
+    pos_args=()
+
+    while [ $# -gt 0 ]; do
+        while getopts "hn:s" opt; do
+            case "${opt}" in
+            h)
+                chores::sugarcrm::connect::cadence::deploy::usage 0
+                ;;
+            n)
+                namespace=${OPTARG}
+                ;;
+            s)
+                sync=true
+                ;;
+            * | \? | :)
+                chores::sugarcrm::connect::cadence::deploy::usage 1
+                ;;
+            esac
+        done
+
+        [ $OPTIND -gt $# ] && break # No more arguments.
+
+        shift $(($OPTIND - 1)) # Free already processed options.
+        OPTIND=1               # Reset OPTIND.
+        pos_args+=$1           # Save the next positional argument.
+        shift                  # Remove the saved argument.
     done
+
+    if [[ "${#pos_args}" -ne 2 ]]; then
+        chores::sugarcrm::connect::cadence::deploy::usage 1
+    fi
+
+    # Assign positional arguments.
+    local branch="${pos_args[1]}"
+    local build="${pos_args[2]}"
 
     (
         cd "${MULTIVERSE}/k8s/services"
@@ -50,7 +64,7 @@ chores::sugarcrm::connect::cadence::deploy() {
 
         for svc in ${namespace}-{celerybeat,crmdata,csinbox,emailtracking,mailbox,main,materializedviews,provisioner,proxy,smartfolders,twowaysync,worker,backoffice,realtime-sync,realtime-worker}; do
             pushd "${svc}"
-            sed -i '' 's|:.*$|:'"${branch}"'\.'"${build}"'|' "docker/${svc}/Dockerfile"
+            sed -i'' 's|:.*$|:'"${branch}"'\.'"${build}"'|' "docker/${svc}/Dockerfile"
             skaffold run --force=true
             popd
         done

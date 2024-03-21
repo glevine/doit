@@ -5,19 +5,19 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::usage() {
-    echo "Usage: chores [sugarcrm]" 1>&2
+doit::usage() {
+    echo "Usage: doit [sugarcrm]" 1>&2
     exit ${1:-0}
 }
 
 if [[ "$#" -eq 0 ]]; then
-    chores::usage 1
+    doit::usage 1
 fi
 
 # Source all files in lib/. Take into consideration that the binary may be
 # linked.
-CHORES_LIB=${0:A:h}/lib
-for file in $(find $CHORES_LIB); do
+DOIT_LIB=${0:A:h}/lib
+for file in $(find $DOIT_LIB); do
     if [[ -f "${file}" ]]; then
         source "${file}"
     fi
@@ -26,9 +26,9 @@ done
 case $1 in
 sugarcrm)
     shift
-    chores::sugarcrm "$@"
+    doit::sugarcrm "$@"
     ;;
 *)
-    chores::usage 1
+    doit::usage 1
     ;;
 esac

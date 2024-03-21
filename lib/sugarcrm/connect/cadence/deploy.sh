@@ -5,12 +5,12 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarcrm::connect::cadence::deploy::usage() {
-    echo "Usage: chores sugarcrm connect cadence deploy <branch> <build> [-n namespace] [-s]" 1>&2
+doit::sugarcrm::connect::cadence::deploy::usage() {
+    echo "Usage: doit sugarcrm connect cadence deploy <branch> <build> [-n namespace] [-s]" 1>&2
     exit ${1:-0}
 }
 
-chores::sugarcrm::connect::cadence::deploy() {
+doit::sugarcrm::connect::cadence::deploy() {
     local namespace="sugarconnect"
     local sync=false
 
@@ -21,7 +21,7 @@ chores::sugarcrm::connect::cadence::deploy() {
         while getopts "hn:s" opt; do
             case "${opt}" in
             h)
-                chores::sugarcrm::connect::cadence::deploy::usage 0
+                doit::sugarcrm::connect::cadence::deploy::usage 0
                 ;;
             n)
                 namespace=${OPTARG}
@@ -30,7 +30,7 @@ chores::sugarcrm::connect::cadence::deploy() {
                 sync=true
                 ;;
             * | \? | :)
-                chores::sugarcrm::connect::cadence::deploy::usage 1
+                doit::sugarcrm::connect::cadence::deploy::usage 1
                 ;;
             esac
         done
@@ -44,7 +44,7 @@ chores::sugarcrm::connect::cadence::deploy() {
     done
 
     if [[ "${#pos_args}" -ne 2 ]]; then
-        chores::sugarcrm::connect::cadence::deploy::usage 1
+        doit::sugarcrm::connect::cadence::deploy::usage 1
     fi
 
     # Assign positional arguments.

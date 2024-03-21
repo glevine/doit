@@ -5,12 +5,12 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarcrm::multiverse::view::usage() {
-    echo "Usage: chores sugarcrm multiverse view [-c cluster] [-r region] [-w workload1,workload2,...,workloadN] -p project1,project2,...,projectN" 1>&2
+doit::sugarcrm::multiverse::view::usage() {
+    echo "Usage: doit sugarcrm multiverse view [-c cluster] [-r region] [-w workload1,workload2,...,workloadN] -p project1,project2,...,projectN" 1>&2
     exit ${1:-0}
 }
 
-chores::sugarcrm::multiverse::view() {
+doit::sugarcrm::multiverse::view() {
     local cluster="dev"
     local projects
     local region="usw2"
@@ -22,7 +22,7 @@ chores::sugarcrm::multiverse::view() {
             cluster=${OPTARG}
             ;;
         h)
-            chores::sugarcrm::multiverse::view::usage 0
+            doit::sugarcrm::multiverse::view::usage 0
             ;;
         p)
             projects=${OPTARG}
@@ -34,27 +34,27 @@ chores::sugarcrm::multiverse::view() {
             workloads=${OPTARG}
             ;;
         * | \? | :)
-            chores::sugarcrm::multiverse::view::usage 1
+            doit::sugarcrm::multiverse::view::usage 1
             ;;
         esac
     done
 
     if [[ -z "${projects}" ]]; then
-        chores::sugarcrm::multiverse::view::usage 1
+        doit::sugarcrm::multiverse::view::usage 1
     fi
 
     kubectx "k8s-${region}-${cluster}"
 
     for project in $(echo ${projects} | sed "s/,/ /g"); do
         figlet "${project}"
-        chores::sugarcrm::multiverse::view::project "${project}" "${workloads}"
+        doit::sugarcrm::multiverse::view::project "${project}" "${workloads}"
     done
 }
 
-chores::sugarcrm::multiverse::view::project() {
+doit::sugarcrm::multiverse::view::project() {
     local project=$1
     local workloads=$2
-    local cmd="chores::sugarcrm::multiverse::projects::${project}::view"
+    local cmd="doit::sugarcrm::multiverse::projects::${project}::view"
 
     if command -v "${cmd}" &>/dev/null; then
         eval "${cmd} ${workloads}"

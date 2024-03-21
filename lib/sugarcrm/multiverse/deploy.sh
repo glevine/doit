@@ -5,30 +5,30 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarcrm::multiverse::deploy::usage() {
-    echo "Usage: chores sugarcrm multiverse deploy -p project1,project2,...,projectN" 1>&2
+doit::sugarcrm::multiverse::deploy::usage() {
+    echo "Usage: doit sugarcrm multiverse deploy -p project1,project2,...,projectN" 1>&2
     exit ${1:-0}
 }
 
-chores::sugarcrm::multiverse::deploy() {
+doit::sugarcrm::multiverse::deploy() {
     local projects
 
     while getopts hp: opt; do
         case "${opt}" in
         h)
-            chores::sugarcrm::multiverse::deploy::usage 0
+            doit::sugarcrm::multiverse::deploy::usage 0
             ;;
         p)
             projects=${OPTARG}
             ;;
         * | \? | :)
-            chores::sugarcrm::multiverse::deploy::usage 1
+            doit::sugarcrm::multiverse::deploy::usage 1
             ;;
         esac
     done
 
     if [[ -z "${projects}" ]]; then
-        chores::sugarcrm::multiverse::deploy::usage 1
+        doit::sugarcrm::multiverse::deploy::usage 1
     fi
 
     (
@@ -40,13 +40,13 @@ chores::sugarcrm::multiverse::deploy() {
 
     for project in $(echo ${projects} | sed "s/,/ /g"); do
         figlet "${project}"
-        chores::sugarcrm::multiverse::deploy::project "${project}"
+        doit::sugarcrm::multiverse::deploy::project "${project}"
     done
 }
 
-chores::sugarcrm::multiverse::deploy::project() {
+doit::sugarcrm::multiverse::deploy::project() {
     local project=$1
-    local cmd="chores::sugarcrm::multiverse::projects::${project}::deploy"
+    local cmd="doit::sugarcrm::multiverse::projects::${project}::deploy"
 
     if command -v "${cmd}" &>/dev/null; then
         eval "${cmd}"

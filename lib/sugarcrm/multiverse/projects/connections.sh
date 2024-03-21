@@ -5,12 +5,12 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-chores::sugarcrm::multiverse::projects::connections::deploy() {
+doit::sugarcrm::multiverse::projects::connections::deploy() {
     # Deploy Kafka topics.
-    chores::sugarcrm::multiverse::deploy::project cxp
+    doit::sugarcrm::multiverse::deploy::project cxp
 
     # Deploy bankshot.
-    chores::sugarcrm::multiverse::deploy::project bankshot
+    doit::sugarcrm::multiverse::deploy::project bankshot
 
     # Deploy connections.
     (

@@ -11,7 +11,7 @@ doit <subcommand1> <subcommand2> <subcommand3> ... <subcommandN>
 Build projects.
 
 ```shell
-doit sugarcrm multiverse build -p bankshot,connections,scloud
+doit sugarcrm multiverse build -p connections,scloud
 ```
 
 Deploy a project to the dev cluster.
@@ -23,17 +23,17 @@ doit sugarcrm multiverse deploy -p connections
 Test projects.
 
 ```shell
-doit sugarcrm multiverse test -p bankshot,connections,golib
+doit sugarcrm multiverse test -p connections,golib
 ```
 
 View projects.
 
 ```shell
 # Show all resources.
-doit sugarcrm multiverse view -c prod -r usw2 -p bankshot,connections,cxp
+doit sugarcrm multiverse view -c prod -r usw2 -p connections,cxp
 
 # Show select resources.
-doit sugarcrm multiverse view -c dev -r usw2 -w pod,job,svc -p bankshot,connections
+doit sugarcrm multiverse view -c dev -r usw2 -w pod,job,svc -p connections
 ```
 
 ## Sugar Connect

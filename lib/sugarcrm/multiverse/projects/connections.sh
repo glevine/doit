@@ -9,9 +9,6 @@ doit::sugarcrm::multiverse::projects::connections::deploy() {
     # Deploy Kafka topics.
     doit::sugarcrm::multiverse::deploy::project cxp
 
-    # Deploy bankshot.
-    doit::sugarcrm::multiverse::deploy::project bankshot
-
     # Deploy connections.
     (
         cd "${MULTIVERSE}/k8s/services/connections"
